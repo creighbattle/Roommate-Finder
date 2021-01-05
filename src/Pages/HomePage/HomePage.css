@@ -1,0 +1,22 @@
+.container {
+  min-height: 100vh;
+  background-color: pink;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome-text-div {
+  margin-top: 300px;
+  width: 70%;
+  text-align: center;
+}
+
+.buttons-div {
+  margin-top: 10px;
+}
+
+.button:hover {
+  color: #000000;
+  background-color: #ffffff;
+}
