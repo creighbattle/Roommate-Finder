@@ -14,6 +14,7 @@ const BoxContainer = styled.div`
   overflow: hidden;
 `;
 
+
 const TopContainer = styled.div`
   width: 100%;
   height: 32vh;
