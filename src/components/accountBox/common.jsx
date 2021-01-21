@@ -15,14 +15,14 @@ export const FormContainer = styled.form`
   box-shadow: 0px 0px 2.5px rgba(15, 15, 15, 0.19);
 `;
 
-export const MutedLink = styled.a`
+export const MutedLink = styled.div`
   font-size: 12px;
   color: rgba(200, 200, 200, 0.8);
   font-weight: 500;
   text-decoration: none;
 `;
 
-export const BoldLink = styled.a`
+export const BoldLink = styled.div`
   font-size: 12px;
   color: #fff;
   font-weight: 500;
@@ -37,6 +37,7 @@ export const Input = styled.input`
   padding: 0px 10px;
   border-bottom: 3px solid transparent;
   transition: all 200ms ease-in-out;
+  font-size: 16px;
 
   &::placeholder {
     color: rgba(200, 200, 200, 1);
@@ -49,6 +50,7 @@ export const Input = styled.input`
   &:focus {
     outline: none;
     border-bottom: 2px solid rgb(49, 206, 155);
+    font-size: 16px;
   }
 `;
 

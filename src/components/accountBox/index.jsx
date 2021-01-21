@@ -4,6 +4,9 @@ import LoginForm from "./loginForm";
 import SignupForm from "./signupForm";
 import { motion, useSpring } from "framer-motion";
 import { AccountContext } from "./accountContext";
+import firebase from "firebase/app";
+import "firebase/auth";
+import Cookies from "js-cookie";
 
 const BoxContainer = styled.div`
   width: 100%;
@@ -13,7 +16,6 @@ const BoxContainer = styled.div`
   background-color: black;
   overflow: hidden;
 `;
-
 
 const TopContainer = styled.div`
   width: 100%;
@@ -83,12 +85,50 @@ const expandingTransition = {
   stiffness: 30,
 };
 
-function AccountBox(props) {
+function AccountBox({ history }) {
   const [isExpanded, setExpanded] = useState(false);
   const [active, setActive] = useState("signin");
+  const [user, setUser] = useState(null);
+
+  // useEffect(() => {
+  //   asyncCall();
+  // }, []);
+
+  // const isUserSignIn = async () => {
+  //   //if (firebase.auth().currentUser) {
+  //   // history.push("/home");
+  //   // }
+
+  //   const user = await firebase.auth().currentUser;
+  //   console.log(user);
+  //   if (user) {
+  //     console.log("hello");
+  //   }
+  // };
+
+  // firebase.auth().onAuthStateChanged((userFirebase) => {
+  //   if (userFirebase) {
+  //     history.push("/home");
+  //   } else {
+  //     console.log("no user signed in");
+  //   }
+  // });
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((userFirebase) => {
+      if (userFirebase) {
+        console.log(userFirebase.uid);
+        Cookies.set("uid", userFirebase.uid);
+        history.push("/home");
+      } else {
+        console.log("no user signed in");
+      }
+    });
+  }, []);
 
   const playExpandingAnimation = () => {
     setExpanded(true);
+    console.log(history);
     setTimeout(() => {
       setExpanded(false);
     }, expandingTransition.duration * 1000 - 1900);
@@ -136,7 +176,7 @@ function AccountBox(props) {
           )}
         </TopContainer>
         <InnerContainer>
-          {active === "signin" && <LoginForm />}
+          {active === "signin" && <LoginForm history={history} />}
           {active === "signup" && <SignupForm />}
         </InnerContainer>
       </BoxContainer>
